@@ -68,17 +68,15 @@ function updateCartMoodal(){
        const cartItemElement = document.createElement("div");
        cartItemElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
 
-
        cartItemElement.innerHTML = `
        <div class="flex items-center justify-between">
-        <div>
-            <p class="font-medium">${item.name}</p>
-            <p>Qtd: ${item.quantity}</p>
-            <p class="font-medium mt-2">R$ ${item.price.toFixed(2)}</p>
-        </div>
-        
+            <div>
+                <p class="font-medium">${item.name}</p>
+                <p>Qtd: ${item.quantity}</p>
+                <p class="font-medium mt-2">R$ ${item.price.toFixed(2)}</p>
+                <p class="font-medium mt-2">Total: R$ ${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
             <button class="remove-from-cart-btn" data-name="${item.name}">Remover</button>
-        
        </div>
        `
 
