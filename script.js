@@ -183,7 +183,7 @@ const cartItems = cart.map((item) => {
         `
     )
     
-}).join("\n")
+}).join("")
 
     const message = encodeURIComponent(cartItems)
     const phone = "+5585988359720"
