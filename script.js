@@ -181,9 +181,15 @@ checkoutBtn.addEventListener("click", function() {
 //Enviar pedido para api whats
 const cartItems = cart.map((item) => {
     return (
-        `${item.name} Quantidade: (${item.quantity}) Preço: R$ ${item.price}`
+        `${item.name} Quantidade: (${item.quantity}) Preço: R$ ${item.price.toFixed(2)} Total: R$ ${(item.price * item.quantity).toFixed(2)} `
     )
-}).join("")
+    
+
+})
+console.log(cartItems);
+
+
+//.join("\n")
 
     const message = encodeURIComponent(cartItems)
     const phone = "+5585988359720"
