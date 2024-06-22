@@ -28,31 +28,44 @@ closeModalBtn.addEventListener("click", function() {
     cartModal.style.display = "none"
 })
 
+
 menu.addEventListener("click", function(event) {
 
+    
     let parentButton = event.target.closest(".add-to-cart-btn")
+   
 
     if (parentButton) {
         const name = parentButton.getAttribute("data-name")
         const price = parseFloat(parentButton.getAttribute("data-price"))
-        addToCart(name, price)
+        //const size = parentButton.getAttribute("data-size")
+       
+        //const size = document.getElementById("select").value;
+        
+        //parentButton.classList.add(size);
+
+        //console.log(name);
+        // console.log(price);
+        // console.log(size);
+       
+        addToCart(name, price)        
     }
-
+       
 })
-
 
 //função para adicionar no carrinho
 function addToCart(name, price){
-    const existingItem = cart.find(item => item.name === name)
-
+    const existingItem = cart.find(item => item.name === name) 
+    
     if(existingItem){
         existingItem.quantity += 1;
-    }else{
+        
+    }else {
         cart.push({
             name,
             price,
             quantity: 1,
-        })   
+        }) 
     }
 
 updateCartMoodal()
@@ -73,6 +86,7 @@ function updateCartMoodal(){
             <div>
                 <p class="font-medium">${item.name}</p>
                 <p>Qtd: ${item.quantity}</p>
+
                 <p class="font-medium mt-2">R$ ${item.price.toFixed(2)}</p>
             </div>
             <button class="remove-from-cart-btn" data-name="${item.name}">Remover</button>
@@ -94,7 +108,6 @@ function updateCartMoodal(){
 }
 
 //função para remover item do carinho
-
 cartItemsContainer.addEventListener("click", function(event) {
     if(event.target.classList.contains("remove-from-cart-btn")){
         const name = event.target.getAttribute("data-name")
@@ -150,7 +163,6 @@ checkoutBtn.addEventListener("click", function() {
         return;
     }
 
-
     if(cart.length === 0) return;
     if(addressInput.value === ""){
         addressWarn.classList.remove("hidden")
@@ -175,20 +187,20 @@ checkoutBtn.addEventListener("click", function() {
 
 //Enviar pedido para api whats
 const cartItems = cart.map((item) => {
-    return (
-        `
-        Produto: ${item.name}
-        Quantidade: (${item.quantity})
-        Preço: R$ ${item.price.toFixed(2)},
-        `
-    )
+    return ( 
+`
+Produto: ${item.name},
+Quantidade: ${item.quantity},
+Valor : R$ ${item.price.toFixed(2)},
+`
+)
     
 }).join("")
 
     const message = encodeURIComponent(cartItems)
-    const phone = "+5585988359720"
+    const phone = "+5585988630278"
 
-    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
+    window.open(`https://wa.me/${phone}?text=Meu pedido:\n${message}\nDúvida: ${addressInput.value}`, "_blank")
 
     cart = [];
     updateCartMoodal();
@@ -198,7 +210,7 @@ const cartItems = cart.map((item) => {
 function checkOpen(){
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 13 && hora < 22;
+    return hora >= 10 && hora < 22;
     //true = loja esta aberta
 }
 
@@ -213,7 +225,6 @@ if(isOpen){
     spanItem.classList.add("bg-red-500");
 
 }
-
 
 
 
